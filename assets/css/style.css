@@ -3,18 +3,48 @@ body {
     background-size: cover;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .jumbotron {
-    margin-top: 2rem;
+    margin-bottom: 0;
     background-color: transparent;
     color: #FFFACD;
     text-shadow: 3px 0 0 #999900;
     font-family: 'Poppins', sans-serif;
 }
 
+.card {
+    background-color: rgba(227, 219, 233, 0.5);
+    border: 2px solid #26004d;
+    color: #FFFACD;
+    text-shadow: 2px 2px 2px #000000;
+
+}
+
+.card:hover {
+    background-color: rgb(209, 140, 243);
+    cursor: pointer;
+}
+
 #start-text {
     margin-top: 2rem;
 }
 
+#time {
+    color: #FFFACD;
+    text-shadow: 2px 0 0 #999900;
+}
+
+#question {
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #start-btn{
-    margin-top: 5rem;
+    position: absolute;
+    top: 12rem;
+    left: 15rem;
 }

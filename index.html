@@ -16,14 +16,50 @@
   <body>
     <div class="container">
         <!-- Header -->
-        <div class="row jumbotron jumbotron-fluid">
+        <div class="row jumbotron jumbotron-fluid py-4">
             <div class="container text-center">
               <h1 class="display-4">Do You Know Studio Ghibli Films?</h1>
               <h3 id="start-text">Name the film based on one GIF</h3>
             </div>
         </div>
+        <div class="row justify-content-center mb-4 hidden">
+            <div class="col-6 text-center">
+                <h4 id="time">Time Remaining: <span id="time-remaining"></span></h4>
+            </div>
+        </div>
         <div class="row align-items-center justify-content-center">
-            <button type="button" class="btn btn-danger btn-lg" id="start-btn">START!</button>
+            <div class="col-6">
+                <div class="row">
+                    <img class="hidden" id="question" src="assets/images/grave-of-the-fireflies.gif">
+                    <button type="button" class="btn btn-danger btn-lg" id="start-btn">START!</button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 hidden">
+            <div class="col-4 text-center">
+                <div class="card m-2">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+                <div class="card m-2">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 text-center">
+                <div class="card m-2">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+                <div class="card m-2">
+                    <div class="card-body">
+                        This is some text within a card body.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
