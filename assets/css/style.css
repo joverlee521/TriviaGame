@@ -2,3 +2,13 @@ body {
     background-image: url("../images/anime-background.jpg");
     background-size: cover;
 }
+
+.jumbotron {
+    background-color: transparent;
+    color: #F2F2F2;
+    margin-top: 2rem;
+}
+
+#start-btn{
+    margin-top: 8rem;
+}
