@@ -4,11 +4,17 @@ body {
 }
 
 .jumbotron {
+    margin-top: 2rem;
     background-color: transparent;
-    color: #F2F2F2;
+    color: #FFFACD;
+    text-shadow: 3px 0 0 #999900;
+    font-family: 'Poppins', sans-serif;
+}
+
+#start-text {
     margin-top: 2rem;
 }
 
 #start-btn{
-    margin-top: 8rem;
+    margin-top: 5rem;
 }
