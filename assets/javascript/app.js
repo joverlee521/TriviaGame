@@ -72,7 +72,7 @@ var game = {
         var that = this; 
         $("#start-btn").on("click", function(){
             that.generateQuestion();
-            $(".hidden").css("visibility", "visible");
+            $(".hidden").css({"visibility": "visible", "opacity": 0.0}).animate({"opacity": 1.0}, 100);
             this.remove();
         })
     },
@@ -91,7 +91,7 @@ var game = {
             answersUsed.push(randomNumber);
             that.generateAnswers();
             that.displayAnswers();
-            $("#answer-choices").show();
+            $("#answer-choices").fadeIn();
         }
         else if (questionsUsed.length == questions.length){
             that.endGame();
@@ -160,7 +160,11 @@ var game = {
             $("#question").attr("src", choosenQuestion.answer);
             $("#question").fadeIn();
         }, 500)
-        setTimeout(function(){that.generateQuestion()}, 3000);
+        setTimeout(function(){$("#game-content").fadeOut();}, 3000);
+        setTimeout(function(){
+            that.generateQuestion();
+            $("#game-content").fadeIn();
+        },3500)
     },
     endGame(){
         $(".hidden").hide();

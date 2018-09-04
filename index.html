@@ -22,50 +22,52 @@
               <h3 id="start-text">Name the film based on one GIF</h3>
             </div>
         </div>
+        <div id="game-content">
         <!-- Timer/Text -->
-        <div class="row justify-content-center mb-4 hidden">
-            <div class="col-6 text-center">
-                <h4 id="time"></h4>
-            </div>
-        </div>
-        <!-- Question -->
-        <div class="row align-items-center justify-content-center">
-            <div class="col-6">
-                <div class="row">
-                    <img class="hidden" id="question" src="assets/images/grave-of-the-fireflies.gif">
-                    <!-- Start Button -->
-                    <button type="button" class="btn btn-danger btn-lg" id="start-btn">START!</button>
+            <div class="row justify-content-center mb-4 hidden">
+                <div class="col-6 text-center">
+                    <h4 id="time"></h4>
                 </div>
             </div>
-            <!-- End Game Display-->
-            <div class="col-12 text-center" id="end-display">
-                    <h3>You're a Ghibli <span id="skill-level"></span>! You got <span id="percent-correct"></span>%!</h3>
-                    <h3>Correct Answers: <span id="correct"></span></h3>
-                    <h3>Incorrect Answers: <span id="incorrect"></span></h3>
-                    <img id="end-img" src="assets/images/grave-of-the-fireflies.gif">
-                    <br><br>
-                    <button type="button" class="btn btn-danger btn-lg" id="restart-btn">Try Again!</button>
-            </div>
-        </div>
-        <!-- Answer Choices -->
-        <div class="row justify-content-center mt-5 hidden" id="answer-choices">
-            <div class="col-4 text-center">
-                <div class="card m-2">
-                    <div class="card-body" id="answer0">
+            <!-- Question -->
+            <div class="row align-items-center justify-content-center">
+                <div class="col-6">
+                    <div class="row">
+                        <img class="hidden" id="question" src="assets/images/grave-of-the-fireflies.gif">
+                        <!-- Start Button -->
+                        <button type="button" class="btn btn-danger btn-lg" id="start-btn">START!</button>
                     </div>
                 </div>
-                <div class="card m-2">
-                    <div class="card-body" id="answer1">
-                    </div>
+                <!-- End Game Display-->
+                <div class="col-12 text-center" id="end-display">
+                        <h3>You're a Ghibli <span id="skill-level"></span>! You got <span id="percent-correct"></span>%!</h3>
+                        <h3>Correct Answers: <span id="correct"></span></h3>
+                        <h3>Incorrect Answers: <span id="incorrect"></span></h3>
+                        <img id="end-img" src="assets/images/grave-of-the-fireflies.gif">
+                        <br><br>
+                        <button type="button" class="btn btn-danger btn-lg" id="restart-btn">Try Again!</button>
                 </div>
             </div>
-            <div class="col-4 text-center">
-                <div class="card m-2">
-                    <div class="card-body" id="answer2">
+            <!-- Answer Choices -->
+            <div class="row justify-content-center mt-5 hidden" id="answer-choices">
+                <div class="col-4 text-center">
+                    <div class="card m-2">
+                        <div class="card-body" id="answer0">
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-body" id="answer1">
+                        </div>
                     </div>
                 </div>
-                <div class="card m-2">
-                    <div class="card-body" id="answer3">
+                <div class="col-4 text-center">
+                    <div class="card m-2">
+                        <div class="card-body" id="answer2">
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-body" id="answer3">
+                        </div>
                     </div>
                 </div>
             </div>
