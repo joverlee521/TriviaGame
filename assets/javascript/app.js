@@ -127,6 +127,7 @@ var game = {
             $("#time").text("Time Remaining: " + time + " seconds");
             if(time < 0){
                 that.timesUp();
+                that.betweenQuestions();
             }
         }, 1000)
     },
@@ -134,15 +135,17 @@ var game = {
         incorrectAnswer++;
         var that = this;
         $("#time").html("TIME'S UP!" + "<br>" + "The answer was: ");
-        that.betweenQuestions();
     },
     verifyAnswer(){
         var that = this;
         $(".card").on("click", function(){
             that.betweenQuestions();
-            if(time >= 0 && $(this).children().text() == choosenQuestion.name){
+            if(time > 0 && $(this).children().text() == choosenQuestion.name){
                 correctAnswer++;
                 $("#time").html("You're CORRECT!" + "<br>" + "The answer was: ");
+            }
+            else if(time <= 0){
+                that.timesUp();
             }
             else {
                 incorrectAnswer++;
@@ -157,13 +160,13 @@ var game = {
         setTimeout(function(){$("#answer-choices").hide()}, 500);
         $("#question").fadeOut(500);
         setTimeout(function(){
-            $("#question").attr("src", choosenQuestion.answer);
+            $("#question").attr({"src": choosenQuestion.answer, "alt": choosenQuestion.name});
             $("#question").fadeIn();
         }, 500)
-        setTimeout(function(){$("#game-content").fadeOut();}, 3000);
+        setTimeout(function(){$("#game-content").fadeOut(500);}, 3000);
         setTimeout(function(){
             that.generateQuestion();
-            $("#game-content").fadeIn();
+            $("#game-content").fadeIn(500);
         },3500)
     },
     endGame(){
