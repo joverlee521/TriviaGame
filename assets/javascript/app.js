@@ -39,12 +39,14 @@ var questions = [
         name: "The Wind Rises",
         question: "assets/images/the-wind-rises.gif"
     }
-]
-var questionsUsed = []
-var answers = []
-var answersUsed = []
-var answersDisplayed = []
-var randomNumber
+];
+var questionsUsed = [];
+var answers = [];
+var answersUsed = [];
+var answersDisplayed = [];
+var randomNumber;
+var time = 30;
+var timer; 
 
 function randomIndex(){
     randomNumber = Math.floor(Math.random()*10);
@@ -63,12 +65,15 @@ var game = {
     generateQuestion(){
         randomIndex();
         if(questionsUsed.indexOf(randomNumber) < 0){
+            this.startTimer();
             $("#question").attr("src", questions[randomNumber].question);
             answers.push(questions[randomNumber].name);
             questionsUsed.push(randomNumber);
             answersUsed.push(randomNumber);
             this.generateAnswers();
             this.displayAnswers();
+            answersUsed = [];
+            answersDisplayed = [];
         }
         else{
             this.generateQuestion();
@@ -92,6 +97,12 @@ var game = {
                 answersDisplayed.push(randomAnswer);
             }
         }
+    },
+    startTimer(){
+        timer = setInterval(function(){
+            time--;
+            $("#time-remaining").text(time);
+        }, 1000)
     }
 }
 
