@@ -1,51 +1,62 @@
 var questions = [
     {
         name: "Castle in the Sky",
-        question: "assets/images/castle-in-the-sky.gif"
+        question: "assets/images/castle-in-the-sky.gif",
+        answer: "assets/images/castle-in-the-sky-answer.jpg"
     },
     {
         name: "Grave of the Fireflies",
-        question: "assets/images/grave-of-the-fireflies.gif"
+        question: "assets/images/grave-of-the-fireflies.gif",
+        answer: "assets/images/grave-of-the-fireflies-answer.jpg"
     },
     {
         name: "Howl's Moving Castle",
-        question: "assets/images/howls-moving-castle.gif"
+        question: "assets/images/howls-moving-castle.gif",
+        answer: "assets/images/howls-moving-castle-answer.jpg"
     },
     {
         name: "Kiki's Delivery Service",
-        question: "assets/images/kiki-delivery-service.gif"
+        question: "assets/images/kiki-delivery-service.gif",
+        answer: "assets/images/kiki-delivery-service-answer.jpg"
     },
     {
         name: "My Neighbor Totoro",
-        question: "assets/images/my-neighbor-totoro.gif"
+        question: "assets/images/my-neighbor-totoro.gif",
+        answer: "assets/images/my-neighbor-totoro-answer.jpg"
     },
     {
         name: "Princess Mononoke",
-        question: "assets/images/princess-mononoke.gif"
+        question: "assets/images/princess-mononoke.gif",
+        answer: "assets/images/princess-mononoke-answer.jpg"
     },
     {
         name: "Spirited Away",
-        question: "assets/images/spirited-away.gif"
+        question: "assets/images/spirited-away.gif",
+        answer: "assets/images/spirited-away-answer.jpg"
     },
     {
         name: "The Tale of the Princess Kaguya",
-        question: "assets/images/tale-of-princess-kaguya.gif"
+        question: "assets/images/tale-of-princess-kaguya.gif",
+        answer: "assets/images/tale-of-princess-kaguya-answer.jpg"
     },
     {
         name: "The Cat Returns",
-        question: "assets/images/the-cat-returns.gif"
+        question: "assets/images/the-cat-returns.gif",
+        answer: "assets/images/the-cat-returns-answer.jpeg"
     },
     {
         name: "The Wind Rises",
-        question: "assets/images/the-wind-rises.gif"
+        question: "assets/images/the-wind-rises.gif",
+        answer: "assets/images/the-wind-rises-answer.jpg"
     }
 ];
 var questionsUsed = [];
 var answers = [];
 var answersUsed = [];
 var answersDisplayed = [];
+var correctAnswer;
 var randomNumber;
-var time = 30;
+var time = 10;
 var timer; 
 
 function randomIndex(){
@@ -67,7 +78,8 @@ var game = {
         if(questionsUsed.indexOf(randomNumber) < 0){
             this.startTimer();
             $("#question").attr("src", questions[randomNumber].question);
-            answers.push(questions[randomNumber].name);
+            correctAnswer = questions[randomNumber];
+            answers.push(correctAnswer.name);
             questionsUsed.push(randomNumber);
             answersUsed.push(randomNumber);
             this.generateAnswers();
@@ -99,10 +111,21 @@ var game = {
         }
     },
     startTimer(){
+        var that = this;
         timer = setInterval(function(){
             time--;
             $("#time-remaining").text(time);
+            if(time < 0){
+                that.timesUp();
+            }
         }, 1000)
+    },
+    timesUp(){
+        clearInterval(timer);
+        time = 10; 
+        $("#answer-choices").hide();
+        $("#question").attr("src", correctAnswer.answer);
+        $("#time").html("TIME'S UP!" + "<br>" + "The answer was:");
     }
 }
 
