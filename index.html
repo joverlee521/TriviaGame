@@ -22,7 +22,7 @@
               <h3 id="start-text">Name the film based on one GIF</h3>
             </div>
         </div>
-        <!-- Timer -->
+        <!-- Timer/Text -->
         <div class="row justify-content-center mb-4 hidden">
             <div class="col-6 text-center">
                 <h4 id="time"></h4>
@@ -37,13 +37,14 @@
                     <button type="button" class="btn btn-danger btn-lg" id="start-btn">START!</button>
                 </div>
             </div>
-            <!-- End Game -->
+            <!-- End Game Display-->
             <div class="col-12 text-center" id="end-display">
+                    <h3>You're a Ghibli <span id="skill-level"></span>! You got <span id="percent-correct"></span>%!</h3>
                     <h3>Correct Answers: <span id="correct"></span></h3>
                     <h3>Incorrect Answers: <span id="incorrect"></span></h3>
-                    <img src="assets/images/grave-of-the-fireflies.gif">
+                    <img id="end-img" src="assets/images/grave-of-the-fireflies.gif">
                     <br><br>
-                    <button type="button" class="btn btn-danger btn-lg" id="restart-btn">Play Again!</button>
+                    <button type="button" class="btn btn-danger btn-lg" id="restart-btn">Try Again!</button>
             </div>
         </div>
         <!-- Answer Choices -->

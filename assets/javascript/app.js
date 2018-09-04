@@ -56,7 +56,7 @@ var answersUsed = [];
 var answersDisplayed = [];
 var choosenQuestion;
 var randomNumber;
-var time = 10;
+var time = 5;
 var timer; 
 var correctAnswer = 0;
 var incorrectAnswer = 0;
@@ -77,26 +77,27 @@ var game = {
         })
     },
     generateQuestion(){
+        var that = this; 
         randomIndex();
         answersUsed = [];
         answersDisplayed = [];
-        time = 10; 
+        time = 5; 
         $("#answer-choices").show();
         if(questionsUsed.indexOf(randomNumber) < 0){
-            this.startTimer();
+            that.startTimer();
             $("#question").attr("src", questions[randomNumber].question);
             choosenQuestion = questions[randomNumber];
             answers.push(choosenQuestion.name);
             questionsUsed.push(randomNumber);
             answersUsed.push(randomNumber);
-            this.generateAnswers();
-            this.displayAnswers();
+            that.generateAnswers();
+            that.displayAnswers();
         }
         else if (questionsUsed.length == questions.length){
-            this.endGame();
+            that.endGame();
         }
         else{
-            this.generateQuestion();
+            that.generateQuestion();
         }
     },
     generateAnswers(){
@@ -158,9 +159,38 @@ var game = {
     },
     endGame(){
         $(".hidden").hide();
+        $("#percent-correct").text(((correctAnswer)/(correctAnswer+incorrectAnswer)*100))
         $("#correct").text(correctAnswer);
         $("#incorrect").text(incorrectAnswer);
+        if(correctAnswer == questions.length){
+            $("#end-img").attr("src", "assets/images/master.gif");
+            $("#skill-level").text("MASTER");
+        }
+        else if(correctAnswer >= (questions.length*0.7)){
+            $("#end-img").attr("src", "assets/images/expert.gif");
+            $("#skill-level").text("EXPERT");
+        }
+        else if(correctAnswer >= (questions.length*0.5)){
+            $("#end-img").attr("src", "assets/images/amateur.gif");
+            $("#skill-level").text("AMATEUR");
+        }
+        else{
+            $("#end-img").attr("src", "assets/images/newbie.gif");
+            $("#skill-level").text("NEWBIE");
+        }
         $("#end-display").show();
+    },
+    resetGame(){
+        var that = this;
+        $("#restart-btn").on("click", function(){
+            $(".hidden").show();
+            $("#end-display").hide();
+            questionsUsed = [];
+            correctAnswer = 0;
+            incorrectAnswer = 0;
+            that.generateQuestion();
+        })
+        
     }
 }
 
@@ -168,4 +198,5 @@ var game = {
 $(document).ready(function(){
     game.initializeGame();
     game.verifyAnswer();
+    game.resetGame();
 })
