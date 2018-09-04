@@ -32,7 +32,7 @@ body {
     margin-top: 2rem;
 }
 
-#time {
+#time, #end-display {
     color: #FFFACD;
     text-shadow: 2px 0 0 #999900;
 }
@@ -43,7 +43,7 @@ body {
     margin-left: auto;
 }
 
-#start-btn{
+#start-btn {
     position: absolute;
     top: 12rem;
     left: 15rem;

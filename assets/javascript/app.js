@@ -42,7 +42,7 @@ var questions = [
     {
         name: "The Cat Returns",
         question: "assets/images/the-cat-returns.gif",
-        answer: "assets/images/the-cat-returns-answer.jpeg"
+        answer: "assets/images/the-cat-returns-answer.jpg"
     },
     {
         name: "The Wind Rises",
@@ -54,10 +54,12 @@ var questionsUsed = [];
 var answers = [];
 var answersUsed = [];
 var answersDisplayed = [];
-var correctAnswer;
+var choosenQuestion;
 var randomNumber;
-var time = 10;
+var time = 5;
 var timer; 
+var correctAnswer = 0;
+var incorrectAnswer = 0;
 
 function randomIndex(){
     randomNumber = Math.floor(Math.random()*10);
@@ -66,6 +68,7 @@ function randomIndex(){
 
 var game = {
     initializeGame(){
+        $("#end-display").hide();
         var that = this; 
         $("#start-btn").on("click", function(){
             that.generateQuestion();
@@ -75,17 +78,22 @@ var game = {
     },
     generateQuestion(){
         randomIndex();
+        $("#answer-choices").show();
         if(questionsUsed.indexOf(randomNumber) < 0){
             this.startTimer();
             $("#question").attr("src", questions[randomNumber].question);
-            correctAnswer = questions[randomNumber];
-            answers.push(correctAnswer.name);
+            choosenQuestion = questions[randomNumber];
+            answers.push(choosenQuestion.name);
             questionsUsed.push(randomNumber);
+            console.log(questionsUsed);
             answersUsed.push(randomNumber);
             this.generateAnswers();
             this.displayAnswers();
             answersUsed = [];
             answersDisplayed = [];
+        }
+        else if (questionsUsed.length == questions.length){
+            this.endGame();
         }
         else{
             this.generateQuestion();
@@ -112,34 +120,32 @@ var game = {
     },
     startTimer(){
         var that = this;
+        $("#time").text("Time Remaining: " + time + " seconds");
         timer = setInterval(function(){
             time--;
-            $("#time-remaining").text(time);
+            $("#time").text("Time Remaining: " + time + " seconds");
             if(time < 0){
                 that.timesUp();
             }
         }, 1000)
     },
     timesUp(){
+        incorrectAnswer++;
+        var that = this;
         clearInterval(timer);
-        time = 10; 
+        time = 5; 
         $("#answer-choices").hide();
-        $("#question").attr("src", correctAnswer.answer);
+        $("#question").attr("src", choosenQuestion.answer);
         $("#time").html("TIME'S UP!" + "<br>" + "The answer was:");
+        setTimeout(function(){that.generateQuestion()}, 1000);
+    },
+    endGame(){
+        $(".hidden").hide();
+        $("#correct").text(correctAnswer);
+        $("#incorrect").text(incorrectAnswer);
+        $("#end-display").show();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 $(document).ready(function(){
