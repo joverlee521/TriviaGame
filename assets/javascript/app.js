@@ -56,7 +56,7 @@ var answersUsed = [];
 var answersDisplayed = [];
 var choosenQuestion;
 var randomNumber;
-var time = 5;
+var time = 10;
 var timer; 
 var correctAnswer = 0;
 var incorrectAnswer = 0;
@@ -78,6 +78,9 @@ var game = {
     },
     generateQuestion(){
         randomIndex();
+        answersUsed = [];
+        answersDisplayed = [];
+        time = 10; 
         $("#answer-choices").show();
         if(questionsUsed.indexOf(randomNumber) < 0){
             this.startTimer();
@@ -85,12 +88,9 @@ var game = {
             choosenQuestion = questions[randomNumber];
             answers.push(choosenQuestion.name);
             questionsUsed.push(randomNumber);
-            console.log(questionsUsed);
             answersUsed.push(randomNumber);
             this.generateAnswers();
             this.displayAnswers();
-            answersUsed = [];
-            answersDisplayed = [];
         }
         else if (questionsUsed.length == questions.length){
             this.endGame();
@@ -132,12 +132,29 @@ var game = {
     timesUp(){
         incorrectAnswer++;
         var that = this;
+        that.betweenQuestions();
+        $("#time").html("TIME'S UP!" + "<br>" + "The answer was: ");
+    },
+    verifyAnswer(){
+        var that = this;
+        $(".card").on("click", function(){
+            that.betweenQuestions();
+            if($(this).children().text() == choosenQuestion.name){
+                correctAnswer++;
+                $("#time").html("You're CORRECT!" + "<br>" + "The answer was: ");
+            }
+            else {
+                incorrectAnswer++;
+                $("#time").html("You're WRONG!" + "<br>" + "The answer was: ");
+            }
+        })
+    },
+    betweenQuestions(){
+        var that = this;
         clearInterval(timer);
-        time = 5; 
         $("#answer-choices").hide();
         $("#question").attr("src", choosenQuestion.answer);
-        $("#time").html("TIME'S UP!" + "<br>" + "The answer was:");
-        setTimeout(function(){that.generateQuestion()}, 1000);
+        setTimeout(function(){that.generateQuestion()}, 3000);
     },
     endGame(){
         $(".hidden").hide();
@@ -150,4 +167,5 @@ var game = {
 
 $(document).ready(function(){
     game.initializeGame();
+    game.verifyAnswer();
 })
