@@ -13,7 +13,7 @@ var questions = [
     },
     {
         name: "Kiki's Delivery Service",
-        question: "assets/images/kiki-delivery-serice.gif"
+        question: "assets/images/kiki-delivery-service.gif"
     },
     {
         name: "My Neighbor Totoro",
@@ -41,6 +41,14 @@ var questions = [
     }
 ]
 var questionsUsed = []
+var answers = []
+var answersUsed = []
+var answersDisplayed = []
+var randomNumber
+
+function randomIndex(){
+    randomNumber = Math.floor(Math.random()*10);
+}
 
 
 var game = {
@@ -53,14 +61,36 @@ var game = {
         })
     },
     generateQuestion(){
-        var random = Math.floor(Math.random()*10);
-        if(questionsUsed.indexOf(random) < 0){
-            $("#question").attr("src", questions[random].question);
-            questionsUsed.push(random);
-            console.log(questionsUsed);
+        randomIndex();
+        if(questionsUsed.indexOf(randomNumber) < 0){
+            $("#question").attr("src", questions[randomNumber].question);
+            answers.push(questions[randomNumber].name);
+            questionsUsed.push(randomNumber);
+            answersUsed.push(randomNumber);
+            this.generateAnswers();
+            this.displayAnswers();
         }
         else{
             this.generateQuestion();
+        }
+    },
+    generateAnswers(){
+        while (answers.length < 4){
+            randomIndex();
+            if(answersUsed.indexOf(randomNumber) < 0){
+                answers.push(questions[randomNumber].name);
+                answersUsed.push(randomNumber);
+            }
+        }
+    },
+    displayAnswers(){
+        while (answers.length > 0){
+            var randomAnswer = Math.floor(Math.random()*4);
+            if(answersDisplayed.indexOf(randomAnswer) < 0){
+                $("#answer"+randomAnswer).text(answers[0]);
+                answers.shift();
+                answersDisplayed.push(randomAnswer);
+            }
         }
     }
 }
