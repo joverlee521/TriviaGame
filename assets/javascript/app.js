@@ -82,7 +82,6 @@ var game = {
         answersUsed = [];
         answersDisplayed = [];
         time = 5; 
-        $("#answer-choices").show();
         if(questionsUsed.indexOf(randomNumber) < 0){
             that.startTimer();
             $("#question").attr("src", questions[randomNumber].question);
@@ -92,6 +91,7 @@ var game = {
             answersUsed.push(randomNumber);
             that.generateAnswers();
             that.displayAnswers();
+            $("#answer-choices").show();
         }
         else if (questionsUsed.length == questions.length){
             that.endGame();
@@ -133,14 +133,14 @@ var game = {
     timesUp(){
         incorrectAnswer++;
         var that = this;
-        that.betweenQuestions();
         $("#time").html("TIME'S UP!" + "<br>" + "The answer was: ");
+        that.betweenQuestions();
     },
     verifyAnswer(){
         var that = this;
         $(".card").on("click", function(){
             that.betweenQuestions();
-            if($(this).children().text() == choosenQuestion.name){
+            if(time >= 0 && $(this).children().text() == choosenQuestion.name){
                 correctAnswer++;
                 $("#time").html("You're CORRECT!" + "<br>" + "The answer was: ");
             }
@@ -153,8 +153,13 @@ var game = {
     betweenQuestions(){
         var that = this;
         clearInterval(timer);
-        $("#answer-choices").hide();
-        $("#question").attr("src", choosenQuestion.answer);
+        $("#answer-choices").fadeOut(500);
+        setTimeout(function(){$("#answer-choices").hide()}, 500);
+        $("#question").fadeOut(500);
+        setTimeout(function(){
+            $("#question").attr("src", choosenQuestion.answer);
+            $("#question").fadeIn();
+        }, 500)
         setTimeout(function(){that.generateQuestion()}, 3000);
     },
     endGame(){
