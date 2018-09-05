@@ -70,7 +70,6 @@ function randomIndex(){
 var game = {
     // Starts game with a start button on the screen
     initializeGame(){
-        $("#end-display").hide();
         var that = this; 
         $("#start-btn").on("click", function(){
             $("#background-music").trigger("play");
@@ -244,6 +243,7 @@ var game = {
 
 
 $(document).ready(function(){
+    $("#end-display").hide();
     game.initializeGame();
     game.verifyAnswer();
     game.resetGame();
