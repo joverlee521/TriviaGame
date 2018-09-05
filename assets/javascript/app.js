@@ -91,6 +91,7 @@ var game = {
             randomIndex();
             // checks question has not been used already in current game
             if(questionsUsed.indexOf(randomNumber) < 0){
+                questionDisplayed = true; 
                 that.startTimer();
                 // Stores choosen question object in variable
                 choosenQuestion = questions[randomNumber];
@@ -107,10 +108,10 @@ var game = {
                 that.displayAnswers();
                 // Displays answer choices
                 $("#answer-choices").fadeIn();
-                questionDisplayed = true; 
             }
             // Ends game when all questions have been used
-            if (questionsUsed.length == questions.length){
+            else if (questionsUsed.length == questions.length){
+                questionDisplayed = true; 
                 that.endGame();
             }
         }
@@ -238,6 +239,7 @@ var game = {
         $("#restart-btn").on("click", function(){
             $(".hidden").show();
             $("#end-display").hide();
+            questionDisplayed = false; 
             questionsUsed = [];
             correctAnswer = 0;
             incorrectAnswer = 0;
