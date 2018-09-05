@@ -1,3 +1,4 @@
+// Array of objects containing questions for trivia game
 var questions = [
     {
         name: "Castle in the Sky",
@@ -50,6 +51,7 @@ var questions = [
         answer: "assets/images/the-wind-rises-answer.jpg"
     }
 ];
+// Variable declarations
 var questionsUsed = [];
 var answers = [];
 var answersUsed = [];
@@ -60,120 +62,152 @@ var time = 5;
 var timer; 
 var correctAnswer = 0;
 var incorrectAnswer = 0;
-
+// Function for generating random numbers 0-9
 function randomIndex(){
     randomNumber = Math.floor(Math.random()*10);
 }
-
-
+// The game
 var game = {
+    // Starts game with a start button on the screen
     initializeGame(){
         $("#end-display").hide();
         var that = this; 
         $("#start-btn").on("click", function(){
             that.generateQuestion();
+            // Animation for fading in hidden elements
             $(".hidden").css({"visibility": "visible", "opacity": 0.0}).animate({"opacity": 1.0}, 100);
+            // Removes start button from DOM
             this.remove();
         })
     },
+    // Picks a random question from the questions array
     generateQuestion(){
         var that = this; 
         randomIndex();
         answersUsed = [];
         answersDisplayed = [];
         time = 5; 
+        // checks question has not been used already in current game
         if(questionsUsed.indexOf(randomNumber) < 0){
             that.startTimer();
-            $("#question").attr("src", questions[randomNumber].question);
+            // Stores choosen question object in variable
             choosenQuestion = questions[randomNumber];
+            // Displays question gif
+            $("#question").attr("src", choosenQuestion.question);
+            // Stores correct answer in answer array
             answers.push(choosenQuestion.name);
+            // Stores questions already used
             questionsUsed.push(randomNumber);
+            // Stores answers already used 
             answersUsed.push(randomNumber);
             that.generateAnswers();
             that.displayAnswers();
+            // Displays answer choices
             $("#answer-choices").fadeIn();
         }
+        // Ends game when all questions have been used
         else if (questionsUsed.length == questions.length){
             that.endGame();
         }
+        // If generated question was already used, pick another question
         else{
             that.generateQuestion();
         }
     },
+    // Pick 3 more random answers for generated question
     generateAnswers(){
         while (answers.length < 4){
             randomIndex();
+            // Checks same answer isn't used twice in one question
             if(answersUsed.indexOf(randomNumber) < 0){
                 answers.push(questions[randomNumber].name);
                 answersUsed.push(randomNumber);
             }
         }
     },
+    // Displays choosen answers in a random order
     displayAnswers(){
         while (answers.length > 0){
             var randomAnswer = Math.floor(Math.random()*4);
             if(answersDisplayed.indexOf(randomAnswer) < 0){
                 $("#answer"+randomAnswer).text(answers[0]);
+                // deletes displayed answer from answer array
                 answers.shift();
+                // stores positions already displaying answers
                 answersDisplayed.push(randomAnswer);
             }
         }
     },
+    // Generates a timer for each question
     startTimer(){
         var that = this;
         $("#time").text("Time Remaining: " + time + " seconds");
         timer = setInterval(function(){
             time--;
             $("#time").text("Time Remaining: " + time + " seconds");
+            // Stops timer once it reaches 0
             if(time < 0){
                 that.timesUp();
                 that.betweenQuestions();
             }
         }, 1000)
     },
+    // Display for time's up
     timesUp(){
         incorrectAnswer++;
-        var that = this;
         $("#time").html("TIME'S UP!" + "<br>" + "The answer was: ");
     },
+    // Verfies player's answer
     verifyAnswer(){
         var that = this;
         $(".card").on("click", function(){
             that.betweenQuestions();
+            // Answer is correct only if there is still time left
             if(time > 0 && $(this).children().text() == choosenQuestion.name){
                 correctAnswer++;
                 $("#time").html("You're CORRECT!" + "<br>" + "The answer was: ");
             }
+            // Choosen answer has no effect if time is up
             else if(time <= 0){
                 that.timesUp();
             }
+            // Wrong answer
             else {
                 incorrectAnswer++;
                 $("#time").html("You're WRONG!" + "<br>" + "The answer was: ");
             }
         })
     },
+    // Displays the correct answer for previous question and transitions into next question
     betweenQuestions(){
         var that = this;
+        // Stops timer
         clearInterval(timer);
+        // Fade out and completely hide answer choices
         $("#answer-choices").fadeOut(500);
         setTimeout(function(){$("#answer-choices").hide()}, 500);
+        // Fade out question gif
         $("#question").fadeOut(500);
+        // Change to answer img and fade back in
         setTimeout(function(){
             $("#question").attr({"src": choosenQuestion.answer, "alt": choosenQuestion.name});
             $("#question").fadeIn();
         }, 500)
+        // Fades out complete game content for smooth transition to next question
         setTimeout(function(){$("#game-content").fadeOut(500);}, 3000);
         setTimeout(function(){
             that.generateQuestion();
             $("#game-content").fadeIn(500);
         },3500)
     },
+    // Hides game content and shows end display
     endGame(){
         $(".hidden").hide();
+        // Shows percent correct and number of correct/incorrect answers
         $("#percent-correct").text(((correctAnswer)/(correctAnswer+incorrectAnswer)*100))
         $("#correct").text(correctAnswer);
         $("#incorrect").text(incorrectAnswer);
+        // Shows a different display depending on player's score
         if(correctAnswer == questions.length){
             $("#end-img").attr("src", "assets/images/master.gif");
             $("#skill-level").text("MASTER");
@@ -192,6 +226,7 @@ var game = {
         }
         $("#end-display").show();
     },
+    // Resets game without reloading the page
     resetGame(){
         var that = this;
         $("#restart-btn").on("click", function(){
