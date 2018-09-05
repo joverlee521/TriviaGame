@@ -190,14 +190,19 @@ var game = {
         $("#question").fadeOut(500);
         // Change to answer img and fade back in
         setTimeout(function(){
-            $("#question").attr({"src": choosenQuestion.answer, "alt": choosenQuestion.name});
-            $("#question").fadeIn();
+            $("#answer-img").attr({"src": choosenQuestion.answer, "alt": choosenQuestion.name});
+            $("#answer-img").css({"visibility": "visible", "opacity": 0.0}).animate({"opacity": 1.0}, 500)
+            $("#answer-img").fadeIn();
         }, 500)
         // Fades out complete game content for smooth transition to next question
-        setTimeout(function(){$("#game-content").fadeOut(500);}, 3500);
         setTimeout(function(){
-            that.generateQuestion();
+            $("#game-content").fadeOut(500);
+            $("#answer-img").fadeOut();
+        }, 3500);
+        setTimeout(function(){
+            $("#question").fadeIn(500);
             $("#game-content").fadeIn(500);
+            that.generateQuestion();
         },4000)
     },
     // Hides game content and shows end display
