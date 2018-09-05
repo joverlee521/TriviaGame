@@ -1,5 +1,7 @@
 # TriviaGame
-Studio Ghibli Trivia Game
+How well do you remember Studio Ghibli films?
+
+![Studio Ghibli Logo](https://github.com/joverlee521/TriviaGame/blob/master/assets/images/ghibli-logo.png)
 
 ## How to Play
 1. A GIF will be displayed, showing a small scene from a Studio Ghibli film.
