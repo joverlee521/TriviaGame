@@ -94,7 +94,7 @@ var game = {
             choosenQuestion = questions[randomNumber];
             // Displays question gif
             $("#question").attr("src", choosenQuestion.question);
-            $("#question").fadeIn(500);
+            setTimeout(function(){$("#question").fadeIn(500)}, 100);
             // Stores correct answer in answer array
             answers.push(choosenQuestion.name);
             // Stores questions already used
