@@ -18,7 +18,7 @@
   <body>
     <div class="container">
         <!-- Header -->
-        <div class="row jumbotron jumbotron-fluid py-4">
+        <div class="row jumbotron jumbotron-fluid py-3">
             <div class="container text-center">
               <h1 class="display-4">Do You Know Studio Ghibli Films?</h1>
               <h3 id="start-text">Name the film based on one GIF</h3>
@@ -75,6 +75,16 @@
                 </div>
             </div>
         </div>
+        <!-- Progress Bar -->
+        <div class="row mb-3 justify-content-center fixed-bottom hidden">
+                <div class="col-6">
+                    <div class="progress">
+                      <div class="progress-bar" id="my-progress-bar" role="progressbar" style="width: 10%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                          <span id="progress"></span>
+                      </div>
+                    </div>
+                </div>
+            </div>
     </div>
     <!-- Background Music -->
     <audio loop id="background-music" src="assets/sounds/background.mp3"></audio>

@@ -60,3 +60,8 @@ body {
     top: 12rem;
     left: 15rem;
 }
+
+#my-progress-bar {
+    color: #ffffff;
+    background-color: #26004d;
+}

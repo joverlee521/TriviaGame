@@ -63,6 +63,7 @@ var time;
 var timer; 
 var correctAnswer = 0;
 var incorrectAnswer = 0;
+var questionNumber = 0;
 // Function for generating random numbers 0-9
 function randomIndex(){
     randomNumber = Math.floor(Math.random()*10);
@@ -87,6 +88,7 @@ var game = {
         answersUsed = [];
         answersDisplayed = [];
         time = 10; 
+        questionNumber++;
         while(!questionDisplayed){
             randomIndex();
             // checks question has not been used already in current game
@@ -108,6 +110,8 @@ var game = {
                 that.displayAnswers();
                 // Displays answer choices
                 $("#answer-choices").fadeIn();
+                $("#progress").text(questionNumber+"/"+questions.length);
+                $("#my-progress-bar").attr({"style": "width: " + (questionNumber/questions.length)*100 + "%"});
             }
             // Ends game when all questions have been used
             else if (questionsUsed.length == questions.length){
@@ -243,6 +247,7 @@ var game = {
             questionsUsed = [];
             correctAnswer = 0;
             incorrectAnswer = 0;
+            questionNumber = 0;
             that.generateQuestion();
         })
         
