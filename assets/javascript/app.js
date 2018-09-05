@@ -171,7 +171,7 @@ var game = {
             // Answer is correct only if there is still time left
             if(time > 0 && $(this).children().text() == choosenQuestion.name){
                 correctAnswer++;
-                $("#time").html("You're CORRECT!" + "<br>" + "The answer was: ");
+                $("#time").html("You're CORRECT!" + "<br>" + "The answer was " + "<i>" + choosenQuestion.name + "</i>");
             }
             // Choosen answer has no effect if time is up
             else if(time <= 0){
@@ -180,7 +180,7 @@ var game = {
             // Wrong answer
             else {
                 incorrectAnswer++;
-                $("#time").html("You're WRONG!" + "<br>" + "The answer was: ");
+                $("#time").html("You're WRONG!" + "<br>" + "The answer was " + "<i>" + choosenQuestion.name + "</i>");
             }
         })
     },
