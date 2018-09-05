@@ -58,7 +58,7 @@ var answersUsed = [];
 var answersDisplayed = [];
 var choosenQuestion;
 var randomNumber;
-var time = 5;
+var time;
 var timer; 
 var correctAnswer = 0;
 var incorrectAnswer = 0;
@@ -87,7 +87,7 @@ var game = {
         randomIndex();
         answersUsed = [];
         answersDisplayed = [];
-        time = 5; 
+        time = 10; 
         // checks question has not been used already in current game
         if(questionsUsed.indexOf(randomNumber) < 0){
             that.startTimer();
@@ -195,11 +195,11 @@ var game = {
             $("#question").fadeIn();
         }, 500)
         // Fades out complete game content for smooth transition to next question
-        setTimeout(function(){$("#game-content").fadeOut(500);}, 3000);
+        setTimeout(function(){$("#game-content").fadeOut(500);}, 3500);
         setTimeout(function(){
             that.generateQuestion();
             $("#game-content").fadeIn(500);
-        },3500)
+        },4000)
     },
     // Hides game content and shows end display
     endGame(){
