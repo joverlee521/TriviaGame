@@ -56,6 +56,7 @@ var questionsUsed = [];
 var answers = [];
 var answersUsed = [];
 var answersDisplayed = [];
+var questionDisplayed = false; 
 var choosenQuestion;
 var randomNumber;
 var time;
@@ -83,36 +84,35 @@ var game = {
     // Picks a random question from the questions array
     generateQuestion(){
         var that = this; 
-        randomIndex();
         answersUsed = [];
         answersDisplayed = [];
         time = 10; 
-        // checks question has not been used already in current game
-        if(questionsUsed.indexOf(randomNumber) < 0){
-            that.startTimer();
-            // Stores choosen question object in variable
-            choosenQuestion = questions[randomNumber];
-            // Displays question gif
-            $("#question").attr("src", choosenQuestion.question);
-            setTimeout(function(){$("#question").fadeIn(500)}, 100);
-            // Stores correct answer in answer array
-            answers.push(choosenQuestion.name);
-            // Stores questions already used
-            questionsUsed.push(randomNumber);
-            // Stores answers already used 
-            answersUsed.push(randomNumber);
-            that.generateAnswers();
-            that.displayAnswers();
-            // Displays answer choices
-            $("#answer-choices").fadeIn();
-        }
-        // Ends game when all questions have been used
-        else if (questionsUsed.length == questions.length){
-            that.endGame();
-        }
-        // If generated question was already used, pick another question
-        else{
-            that.generateQuestion();
+        while(!questionDisplayed){
+            randomIndex();
+            // checks question has not been used already in current game
+            if(questionsUsed.indexOf(randomNumber) < 0){
+                that.startTimer();
+                // Stores choosen question object in variable
+                choosenQuestion = questions[randomNumber];
+                // Displays question gif
+                $("#question").attr("src", choosenQuestion.question);
+                setTimeout(function(){$("#question").fadeIn(500)}, 100);
+                // Stores correct answer in answer array
+                answers.push(choosenQuestion.name);
+                // Stores questions already used
+                questionsUsed.push(randomNumber);
+                // Stores answers already used 
+                answersUsed.push(randomNumber);
+                that.generateAnswers();
+                that.displayAnswers();
+                // Displays answer choices
+                $("#answer-choices").fadeIn();
+                questionDisplayed = true; 
+            }
+            // Ends game when all questions have been used
+            if (questionsUsed.length == questions.length){
+                that.endGame();
+            }
         }
     },
     // Pick 3 more random answers for generated question
@@ -201,6 +201,7 @@ var game = {
             $("#answer-img").fadeOut();
         }, 3500);
         setTimeout(function(){
+            questionDisplayed = false; 
             that.generateQuestion();
             $("#game-content").fadeIn(500);
         },4000)
