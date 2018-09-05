@@ -73,6 +73,7 @@ var game = {
         $("#end-display").hide();
         var that = this; 
         $("#start-btn").on("click", function(){
+            $("#background-music").trigger("play");
             that.generateQuestion();
             // Animation for fading in hidden elements
             $(".hidden").css({"visibility": "visible", "opacity": 0.0}).animate({"opacity": 1.0}, 100);
