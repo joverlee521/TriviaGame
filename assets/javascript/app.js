@@ -167,6 +167,7 @@ var game = {
     verifyAnswer(){
         var that = this;
         $(".card").on("click", function(){
+            $(".card").css("pointer-events", "none");
             that.betweenQuestions();
             // Answer is correct only if there is still time left
             if(time > 0 && $(this).children().text() == choosenQuestion.name){
@@ -209,6 +210,7 @@ var game = {
             questionDisplayed = false; 
             that.generateQuestion();
             $("#game-content").fadeIn(500);
+            $(".card").css("pointer-events", "auto");
         },4000)
     },
     // Hides game content and shows end display
