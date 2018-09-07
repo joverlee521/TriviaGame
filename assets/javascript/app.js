@@ -78,7 +78,7 @@ var game = {
             that.generateQuestion();
             // Animation for fading in hidden elements
             $(".hidden").css({"visibility": "visible", "opacity": 0.0}).animate({"opacity": 1.0}, 100);
-            // Removes start button from DOM
+            // Removes start button
             this.remove();
         })
     },
@@ -89,6 +89,7 @@ var game = {
         answersDisplayed = [];
         time = 10; 
         questionNumber++;
+        // Keep picking a new random question until question is displayed
         while(!questionDisplayed){
             randomIndex();
             // checks question has not been used already in current game
@@ -110,6 +111,7 @@ var game = {
                 that.displayAnswers();
                 // Displays answer choices
                 $("#answer-choices").fadeIn();
+                // Change progress bar display 
                 $("#progress").text(questionNumber+"/"+questions.length);
                 $("#my-progress-bar").attr({"style": "width: " + (questionNumber/questions.length)*100 + "%"});
             }
@@ -167,6 +169,7 @@ var game = {
     verifyAnswer(){
         var that = this;
         $(".card").on("click", function(){
+            // Prevents player form choosing another answer once they have picked one
             $(".card").css("pointer-events", "none");
             that.betweenQuestions();
             // Answer is correct only if there is still time left
@@ -206,6 +209,7 @@ var game = {
             $("#game-content").fadeOut(500);
             $("#answer-img").fadeOut();
         }, 3500);
+        // Sets up display for next question
         setTimeout(function(){
             questionDisplayed = false; 
             that.generateQuestion();
@@ -252,10 +256,8 @@ var game = {
             questionNumber = 0;
             that.generateQuestion();
         })
-        
     }
 }
-
 
 $(document).ready(function(){
     $("#end-display").hide();
