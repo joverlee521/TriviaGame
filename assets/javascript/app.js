@@ -163,7 +163,7 @@ var game = {
     // Display for time's up
     timesUp(){
         incorrectAnswer++;
-        $("#time").html("TIME'S UP!" + "<br>" + "The answer was: ");
+        $("#time").html("TIME'S UP!" + "<br>" + "The answer was: " + "<i>" + choosenQuestion.name + "</i>");
     },
     // Verfies player's answer
     verifyAnswer(){
