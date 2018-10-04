@@ -1,4 +1,4 @@
-# TriviaGame
+# [TriviaGame](https://joverlee521.github.io/TriviaGame/)
 How well do you remember Studio Ghibli films?
 
 ![Studio Ghibli Logo](https://github.com/joverlee521/TriviaGame/blob/master/assets/images/ghibli-logo.png)
